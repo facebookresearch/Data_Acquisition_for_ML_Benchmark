@@ -42,7 +42,7 @@ class Helper(object):
         return: train X and y 
         '''
         
-        print(" train buyer model ")
+        #print(" train buyer model ")
         
         stretagy = submission
         buyer_budget = MarketEngineObj.buyer_budget

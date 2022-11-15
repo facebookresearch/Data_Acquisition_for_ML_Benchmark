@@ -57,7 +57,7 @@ class MarketEngine(object):
         MyBuyer.load_mlmodel(mlmodel1)
         self.buyer = MyBuyer
         self.buyer_budget = buyer_budget
-        print("set up the market")
+        #print("set up the market")
         return
 
     def load_stretagy(self,
