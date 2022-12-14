@@ -50,6 +50,10 @@ class Seller(object):
     def setprice(self, pricefunc):
         self.pricefunc = pricefunc
         
+    def getprice(self,data_size):
+        q1 = data_size/(len(self.data))
+        return self.pricefunc.get_price(q1) 
+    
     def getdata(self, data_size, price):
         data = self.data
         q1 = data_size/(len(self.data))
