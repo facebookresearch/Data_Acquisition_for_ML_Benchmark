@@ -86,9 +86,9 @@ class Helper(object):
     
     def load_market_instance(self,
                     feature_path="features/0/",
+                    buyer_data_path="buyerdata.csv",
                     price_path="price.txt",
                     budget_path="budget.txt",
-                    buyer_id=0,
                     ):
         paths = glob.glob(feature_path+"*.csv")
         print("paths:",paths)
@@ -101,14 +101,13 @@ class Helper(object):
         datafull = [numpy.loadtxt(path,delimiter=',') for path in paths]
         pricefull = numpy.loadtxt(price_path,delimiter=',',dtype=str) 
         for i in range(len(datafull)):
-            if(i==buyer_id):
-                buyer_data = datafull[i]
-            else:
+            if(1):
                 seller_data.append(datafull[i])
                 #print(pricefull[i])
                 MyPricing1 = PriceFunction()
                 MyPricing1.setup(max_p = float(pricefull[i][1]), method=pricefull[i][0])
                 seller_prices.append(MyPricing1)
+        buyer_data =  numpy.loadtxt(buyer_data_path,delimiter=',')    
         return seller_data, seller_prices,  buyer_data, buyer_budget 
 def main():
     print("test of the helper")
@@ -143,7 +142,12 @@ def main():
     #print("acc is ",acc1)
     
     MyHelper = Helper()
-    seller_data, seller_prices,  buyer_data, buyer_budget  = MyHelper.load_market_instance(feature_path="../features/0/")
+    seller_data, seller_prices,  buyer_data, buyer_budget  = MyHelper.load_market_instance(
+        feature_path="../features/0/",
+        buyer_data_path="../marketinfo/0/data_buyer/20.csv",
+        price_path="../marketinfo/0/price/price.txt",
+        budget_path="../marketinfo/0/price/budget.txt",
+        )
     MyMarketEngine.setup_market(seller_data=seller_data,
                                 seller_prices = seller_prices,
                                 buyer_data=buyer_data,
