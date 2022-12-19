@@ -11,7 +11,7 @@ How can one decide which datasets to acquire before actually purchasing the data
 
 ## 2. How to access the buyer's observation?
 
-We provide a simple python library to access the buyer’s observation in each data marketplace. After installing the library DAM, one can use the following code to specify the marketplace id
+We provide a simple python library to access the buyer’s observation in each data marketplace. TO use it, (i) clone this repo, (ii) download the [data](https://drive.google.com/drive/folders/1DcML_lGqiwvN-l0KHE-WQG84gweydtZn?usp=sharing), (iii) unzip it, and (iv) place it under the folder ```marketinfo```.  Now, one can use the following code to specify the marketplace id
 
 ```
 importDam
