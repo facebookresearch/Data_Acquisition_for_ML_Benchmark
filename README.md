@@ -64,8 +64,10 @@ The submission should contain K(=5) csv files. k.csv corresponds to the purchase
 
 Each csv file should contain one line of numbers, where the ith number indicates the number of data to purchase from the ith seller. For example, 0.csv containing
 
+```
 100,50,200,500
- 
+```
+
 means buying 100, 50, 200, and 500 samples from seller 1, seller 2, seller 3, and seller 4 separately. 
 
 
@@ -81,9 +83,9 @@ Requirements:
 
 (iii) do not create multiple accounts for submission;
 
-(iv) follow the honor code (TODO: a clarification of the honor code);
+(iv) follow the honor code;
 
-(v) submit at most x times per week ;
+(v) submit at most 2 times per week ;
 
 
 
