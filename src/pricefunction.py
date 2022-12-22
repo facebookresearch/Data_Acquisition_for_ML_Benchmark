@@ -36,6 +36,8 @@ class PriceFunction(object):
     def get_price(self, 
                  frac=1, 
                  ):
+        if(frac<0 or frac>1):
+            raise ValueError("THe fraction of samples must be within [0,1]!")
         max_p = self.max_p
         if(self.method=="lin"):
             p1 = max_p * frac

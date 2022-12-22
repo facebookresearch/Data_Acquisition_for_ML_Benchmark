@@ -24,6 +24,7 @@ Created on Tue Aug 16 18:35:29 2022
 
 from pricefunction import PriceFunction
 import numpy
+numpy.random.seed(1111)
 
 class Seller(object):
 
@@ -50,17 +51,23 @@ class Seller(object):
     def setprice(self, pricefunc):
         self.pricefunc = pricefunc
         
+    def getprice(self,data_size):
+        q1 = data_size/(len(self.data))
+        return self.pricefunc.get_price(q1) 
+    
     def getdata(self, data_size, price):
         data = self.data
         q1 = data_size/(len(self.data))
+        if(q1>1):
+            raise ValueError("The required number of samples is too large!")
+
         if(self.pricefunc.get_price(q1) <= price):
             number_of_rows = self.data.shape[0]
             random_indices = numpy.random.choice(number_of_rows, 
                                   size=data_size, 
-                                  replace=False)
+                                  replace=True)
             rows = data[random_indices, :]
             return rows
-            return 0
         else:
             raise ValueError("The buyer's offer is too small!")
         return
