@@ -24,7 +24,7 @@ Created on Tue Aug 16 18:36:30 2022
 
 
 from sklearn.linear_model import LogisticRegression
-
+from sklearn.neighbors import KNeighborsClassifier
 
 
 import numpy
@@ -33,6 +33,7 @@ from buyer import Buyer
 from pricefunction import PriceFunction
 from marketengine import MarketEngine
 import glob
+import pandas
 
 def sub2stretagy(submission,MarketEngineObj):
     stretagy1 = list()
@@ -98,7 +99,8 @@ class Helper(object):
         buyer_budget = numpy.loadtxt(budget_path)
         buyer_budget = float(buyer_budget)
         #print('budget_ is', type(buyer_budget))
-        datafull = [numpy.loadtxt(path,delimiter=',') for path in paths]
+#        datafull = [numpy.loadtxt(path,delimiter=',') for path in paths]
+        datafull = [pandas.read_csv(path,header=None).to_numpy() for path in paths]
         pricefull = numpy.loadtxt(price_path,delimiter=',',dtype=str) 
         for i in range(len(datafull)):
             if(1):
@@ -107,7 +109,8 @@ class Helper(object):
                 MyPricing1 = PriceFunction()
                 MyPricing1.setup(max_p = float(pricefull[i][1]), method=pricefull[i][0])
                 seller_prices.append(MyPricing1)
-        buyer_data =  numpy.loadtxt(buyer_data_path,delimiter=',')    
+#        buyer_data =  numpy.loadtxt(buyer_data_path,delimiter=',')    
+        buyer_data =  pandas.read_csv(buyer_data_path,header=None).to_numpy()  
         return seller_data, seller_prices,  buyer_data, buyer_budget 
 def main():
     print("test of the helper")
@@ -143,21 +146,29 @@ def main():
     
     MyHelper = Helper()
     seller_data, seller_prices,  buyer_data, buyer_budget  = MyHelper.load_market_instance(
-        feature_path="../features/0/",
-        buyer_data_path="../marketinfo/0/data_buyer/20.csv",
-        price_path="../marketinfo/0/price/price.txt",
-        budget_path="../marketinfo/0/price/budget.txt",
+        feature_path="../features/2/",
+        buyer_data_path="../marketinfo/2/data_buyer/20.csv",
+        price_path="../marketinfo/2/price/price.txt",
+        budget_path="../marketinfo/2/price/budget.txt",
         )
+    print("load data finished")		
     MyMarketEngine.setup_market(seller_data=seller_data,
                                 seller_prices = seller_prices,
                                 buyer_data=buyer_data,
                                 buyer_budget=buyer_budget,
                                 mlmodel=mlmodel1,
                                 )
-
+    print("set up market finished")
     stretagy=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,10,10,10,10,15]
+    stretagy=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0,0,0,0,0]
+    stretagy=[10,20,30,40,50,60,70,80,9,10,11,12,13,14,15,0,0,0,0,0]
+    stretagy=[10,20,30,40,50,60,70,80,9,10,11,12,13,14,15,0,0,0,0,0]
+    stretagy=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0,0,0,0,0]
+    stretagy=[10,20,30,40,50,60,70,800,9,10,11,12,13,14,15,0,0,0,0,0]
+	
     traindata = MyHelper.load_data(stretagy, MyMarketEngine)
     model = LogisticRegression(random_state=0)
+    model = KNeighborsClassifier(n_neighbors=9)	
     model = MyHelper.train_model(model, traindata[:,0:-1],
                                  numpy.ravel(traindata[:,-1]))
     acc1 = MyHelper.eval_model(model,test_X=buyer_data[:,0:-1],test_Y=buyer_data[:,-1])
