@@ -54,13 +54,13 @@ Here, seller_i_summary['row_number'] and seller_i_summary['column_number'] encod
 For example, one can print the histogram of the second feature by 
 ```
 print(seller_i_summary['hist']['2'])
-{'0_size': 3, '1_size': 35, '2_size': 198, '3_size': 821, '4_size': 2988, '5_size': 8496, '6_size': 11563, '7_size': 5155, '8_size': 704, '9_size': 37, '0_range': -0.7187578082084656, '1_range': -0.5989721298217774, '2_range': -0.4791864514350891, '3_range': -0.3594007730484009, '4_range': -0.23961509466171266, '5_range': -0.11982941627502441, '6_range': -4.373788833622605e-05, '7_range': 0.11974194049835207, '8_range': 0.23952761888504026, '9_range': 0.35931329727172856, '10_range': 0.47909897565841675}
+>>> {'0_size': 3, '1_size': 35, '2_size': 198, '3_size': 821, '4_size': 2988, '5_size': 8496, '6_size': 11563, '7_size': 5155, '8_size': 704, '9_size': 37, '0_range': -0.7187578082084656, '1_range': -0.5989721298217774, '2_range': -0.4791864514350891, '3_range': -0.3594007730484009, '4_range': -0.23961509466171266, '5_range': -0.11982941627502441, '6_range': -4.373788833622605e-05, '7_range': 0.11974194049835207, '8_range': 0.23952761888504026, '9_range': 0.35931329727172856, '10_range': 0.47909897565841675}
 ```
 How to read this? This representation basically documents (i) how the histogram bins are created (i_range), and (ii) how many points fall into each bin (i_size). For example, '2_size':198 means 198 data points are in the 2nd bin, and '' '2_range': -0.4791864514350891, '3_range': -0.3594007730484009'' means the 2nd bin is within [-0.4791864514350891,-0.3594007730484009].
 
 ```
 print(seller_i_summary['label_correlation']['2'])
-0.08490820825406746
+>>> 0.08490820825406746
 ```
 This means the correlation between the 2nd feature and the label is 0.08490820825406746.
 
