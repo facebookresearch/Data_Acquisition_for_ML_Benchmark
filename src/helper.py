@@ -25,8 +25,8 @@ Created on Tue Aug 16 18:36:30 2022
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-
-
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.dummy import DummyClassifier
 import numpy
 from seller import Seller
 from buyer import Buyer
@@ -100,7 +100,7 @@ class Helper(object):
         buyer_budget = float(buyer_budget)
         #print('budget_ is', type(buyer_budget))
 #        datafull = [numpy.loadtxt(path,delimiter=',') for path in paths]
-        datafull = [pandas.read_csv(path,header=None).to_numpy() for path in paths]
+        datafull = [pandas.read_csv(path,header=None,engine="pyarrow").to_numpy() for path in paths]
         pricefull = numpy.loadtxt(price_path,delimiter=',',dtype=str) 
         for i in range(len(datafull)):
             if(1):
@@ -162,17 +162,30 @@ def main():
     stretagy=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,10,10,10,10,15]
     stretagy=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0,0,0,0,0]
     stretagy=[10,20,30,40,50,60,70,80,9,10,11,12,13,14,15,0,0,0,0,0]
-    stretagy=[10,20,30,40,50,60,70,80,9,10,11,12,13,14,15,0,0,0,0,0]
-    stretagy=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0,0,0,0,0]
     stretagy=[10,20,30,40,50,60,70,800,9,10,11,12,13,14,15,0,0,0,0,0]
+    stretagy=[10,20,30,40,50,60,70,80,9,10,11,12,13,14,15,0,0,0,0,0]
+    stretagy=[50,20,30,40,5,6,7,80,9,10,11,12,13,14,15,0,400,0,50,0]
+
+    stretagy=[100,200,300,400,500,600,70,80,9,10,11,12,13,14,15,50,50,50,50,50]
+    stretagy=[10,20,30,40,50,60,70,80,9,10,11,12,13,14,15,50,50,50,50,50]
+    stretagy=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0,0,0,0,0]
 	
     traindata = MyHelper.load_data(stretagy, MyMarketEngine)
+    model = RandomForestClassifier()	
     model = LogisticRegression(random_state=0)
     model = KNeighborsClassifier(n_neighbors=9)	
+
     model = MyHelper.train_model(model, traindata[:,0:-1],
                                  numpy.ravel(traindata[:,-1]))
     acc1 = MyHelper.eval_model(model,test_X=buyer_data[:,0:-1],test_Y=buyer_data[:,-1])
+		
     print("acc is:", acc1)
+    model2 = DummyClassifier(strategy="most_frequent")	
+    model2 = MyHelper.train_model(model2, traindata[:,0:-1],
+                                 numpy.ravel(traindata[:,-1]))	
+    acc2 = MyHelper.eval_model(model2,test_X=buyer_data[:,0:-1],test_Y=buyer_data[:,-1])
+    print("dummy acc is:", acc2)
+	
 if __name__ == '__main__':
     main()        
     
