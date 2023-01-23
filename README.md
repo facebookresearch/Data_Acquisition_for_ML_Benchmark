@@ -12,9 +12,9 @@ How can one decide which datasets to acquire before actually purchasing the data
 ## 2. How to access the buyer's observation?
 
 We provide a simple python library to access the buyer’s observation in each data marketplace.
-To use it, we recommand create a virtual environment by
+To use it, we recommand to create a virtual environment by
 ```
-conda create -n DAM python=3.821
+conda create -n DAM python=3.8
 conda activate DAM
 ```
 and then install all libraries by
