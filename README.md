@@ -19,7 +19,8 @@ conda activate DAM
 ```
 and then install all libraries by
 ```
-pip install -r requirement.txt```
+pip install -r requirement.txt
+```
 
 Next, (i) clone this repo, (ii) download the [data](https://drive.google.com/drive/folders/1DcML_lGqiwvN-l0KHE-WQG84gweydtZn?usp=sharing), (iii) unzip the data, and (iv) place it under the folder ```marketinfo```.  
 
