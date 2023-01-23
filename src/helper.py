@@ -110,7 +110,7 @@ class Helper(object):
                 MyPricing1.setup(max_p = float(pricefull[i][1]), method=pricefull[i][0])
                 seller_prices.append(MyPricing1)
 #        buyer_data =  numpy.loadtxt(buyer_data_path,delimiter=',')    
-        buyer_data =  pandas.read_csv(buyer_data_path,header=None).to_numpy()  
+        buyer_data =  pandas.read_csv(buyer_data_path,header=None,engine="pyarrow").to_numpy()  
         return seller_data, seller_prices,  buyer_data, buyer_budget 
 def main():
     print("test of the helper")
@@ -172,8 +172,8 @@ def main():
 	
     traindata = MyHelper.load_data(stretagy, MyMarketEngine)
     model = RandomForestClassifier()	
-    model = LogisticRegression(random_state=0)
     model = KNeighborsClassifier(n_neighbors=9)	
+    model = LogisticRegression(random_state=0)
 
     model = MyHelper.train_model(model, traindata[:,0:-1],
                                  numpy.ravel(traindata[:,-1]))
