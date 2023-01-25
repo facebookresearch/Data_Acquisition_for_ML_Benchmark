@@ -18,6 +18,7 @@ import numpy
 import pickle
 import json
 from pricefunction import PriceFunction
+import pandas
 class Dam(object):
     def __init__(self, 
                  instance=0,
@@ -33,8 +34,8 @@ class Dam(object):
         return float(budget)
     
     def getbuyerdata(self,):
-        buydata = numpy.loadtxt(self._marketpath+str(self._instance)+"/data_buyer/"+"/20.csv",
-                                delimiter=',')
+        path = self._marketpath+str(self._instance)+"/data_buyer/"+"/20.csv"
+        buydata = pandas.read_csv(path,header=None,engine="pyarrow").to_numpy()
         return buydata
     
     def getmlmodel(self,):
