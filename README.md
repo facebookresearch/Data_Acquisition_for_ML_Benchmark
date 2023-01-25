@@ -22,7 +22,7 @@ and then install all libraries by
 pip install -r requirement.txt
 ```
 
-Next, (i) clone this repo, (ii) download the [data](https://drive.google.com/drive/folders/1JQhkG4yiU7exdoHhFs4eVfZapY2giaqt?usp=share_link), (iii) unzip the data, and (iv) place it under the folder ```marketinfo```.  
+Next, (i) clone this repo, (ii) download the [data](https://drive.google.com/drive/folders/1JQhkG4yiU7exdoHhFs4eVfZapY2giaqt?usp=share_link), (iii) unzip the data, and (iv) place the downloaded and unzipped ```marketinfo``` folder in the top level of this repo.  
 
 Now, under the src folder, one can run the example
 ```
@@ -32,6 +32,7 @@ python3 example.py
 We give a few more explanation below.
 
 To specify the marketplace id
+
 
 ```
 from dam import Dam
