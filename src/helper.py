@@ -50,6 +50,12 @@ def sub2stretagy(submission,MarketEngineObj):
 class Helper(object):
     def __init__(self):
         return
+    
+    def get_cost(self,submission,MarketEngineObj):
+        stretagy = sub2stretagy(submission,MarketEngineObj)
+        cost = sum(stretagy[1])
+        return cost
+
     def load_data(self, submission, MarketEngineObj):
         '''
         load submissions.
@@ -60,7 +66,7 @@ class Helper(object):
         
         stretagy = sub2stretagy(submission,MarketEngineObj)
         buyer_budget = MarketEngineObj.buyer_budget
-        
+        print("strategy is:",stretagy)
         # check if the budget constraint is satisified.
         cost = sum(stretagy[1])
         if(cost>buyer_budget):
@@ -101,6 +107,7 @@ class Helper(object):
         #print('budget_ is', type(buyer_budget))
 #        datafull = [numpy.loadtxt(path,delimiter=',') for path in paths]
         datafull = [pandas.read_csv(path,header=None,engine="pyarrow").to_numpy() for path in paths]
+        seller_datasize = [len(data1) for data1 in datafull]
         pricefull = numpy.loadtxt(price_path,delimiter=',',dtype=str) 
         for i in range(len(datafull)):
             if(1):
@@ -111,7 +118,7 @@ class Helper(object):
                 seller_prices.append(MyPricing1)
 #        buyer_data =  numpy.loadtxt(buyer_data_path,delimiter=',')    
         buyer_data =  pandas.read_csv(buyer_data_path,header=None,engine="pyarrow").to_numpy()  
-        return seller_data, seller_prices,  buyer_data, buyer_budget 
+        return seller_data, seller_prices,  buyer_data, buyer_budget, seller_datasize 
 def main():
     print("test of the helper")
     MyMarketEngine = MarketEngine()
@@ -145,13 +152,15 @@ def main():
     #print("acc is ",acc1)
     
     MyHelper = Helper()
-    seller_data, seller_prices,  buyer_data, buyer_budget  = MyHelper.load_market_instance(
-        feature_path="../features/2/",
-        buyer_data_path="../marketinfo/2/data_buyer/20.csv",
-        price_path="../marketinfo/2/price/price.txt",
-        budget_path="../marketinfo/2/price/budget.txt",
+    seller_data, seller_prices,  buyer_data, buyer_budget, seller_datasize = MyHelper.load_market_instance(
+        feature_path="../features/0/",
+        buyer_data_path="../marketinfo/0/data_buyer/20.csv",
+        price_path="../marketinfo/0/price/price.txt",
+        budget_path="../marketinfo/0/price/budget.txt",
         )
     print("load data finished")		
+    print("seller data size:",seller_datasize)
+    numpy.savetxt("../marketinfo/0/seller_datasize.csv",seller_datasize,fmt="%d")
     MyMarketEngine.setup_market(seller_data=seller_data,
                                 seller_prices = seller_prices,
                                 buyer_data=buyer_data,
