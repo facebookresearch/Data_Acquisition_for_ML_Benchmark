@@ -29,21 +29,31 @@ class PriceFunction(object):
     def __init__(self):
         return
         
-    def setup(self, max_p = 100, method="lin"):
+    def setup(self, max_p = 100, method="lin",
+            data_size=1):
         self.max_p = max_p
-        self.method="lin"
+        self.method = "lin"
+        self.data_size = data_size
 
     def get_price(self, 
                  frac=1, 
                  ):
         if(frac<0 or frac>1):
-            raise ValueError("THe fraction of samples must be within [0,1]!")
+            raise ValueError("The fraction of samples must be within [0,1]!")
         max_p = self.max_p
         if(self.method=="lin"):
             p1 = max_p * frac
             return p1
         
         return
+
+    def get_price_samplesize(self,
+                            samplesize=10,
+                            ):
+        frac = samplesize/self.data_size
+        #print("frac is",frac)
+        return self.get_price(frac)
+
         
 
     

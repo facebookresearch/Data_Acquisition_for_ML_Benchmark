@@ -19,7 +19,7 @@ conda activate DAM
 ```
 and then install all libraries by
 ```
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 Next, (i) clone this repo, (ii) download the [data](https://drive.google.com/drive/folders/1JQhkG4yiU7exdoHhFs4eVfZapY2giaqt?usp=share_link), (iii) unzip the data, and (iv) place the downloaded and unzipped ```marketinfo``` folder in the top level of this repo.  
@@ -64,13 +64,20 @@ seller_i_price, seller_i_summary, seller_i_samples =  MyDam.getsellerinfo(seller
 
 seller_i_price contains the pricing function. seller_i_summary includes (i) the number of rows, (ii) the number of columns, (iii) the histogram of each dimension, and (iv) the correlation between each column and the label. Seller_i_samples contains 5 samples from each dataset.  
 
+More details on the price function: given a sample size, the price can be calculated by calling the get_price_samplesize function. For example, if the sample size is 100, then calling
+
+```
+seller_i_price.get_price_samplesize(samplesize=100)
+```
+gives the price.
+
 More details on the seller summary: the seller_i_summary contains four fields as follows:
 
 ```
 seller_i_summary.keys()
 >>> dict_keys(['row_number', 'column_number', 'hist', 'label_correlation'])
 ```
-Here, seller_i_summary['row_number'] and seller_i_summary['column_number'] encode the number of data points and number of features, respectively. seller_i_summary['hist'] is a dictionary containg the histgram for each feature. seller_i_summary['label_correlation'] is a dictionary that represents the pearson correlation between each feature and the label.
+Here, seller_i_summary['row_number'] encode the number of data points. Similarly, seller_i_summary['column_number'] equals the number of features plus (the label). seller_i_summary['hist'] is a dictionary containg the histgram for each feature. seller_i_summary['label_correlation'] is a dictionary that represents the pearson correlation between each feature and the label.
 
 For example, one can print the histogram of the second feature by 
 ```
@@ -85,7 +92,7 @@ print(seller_i_summary['label_correlation']['2'])
 ```
 This means the correlation between the 2nd feature and the label is 0.08490820825406746.
 
-Note that all features in the sellers and buyers' datasets are NOT in their raw form. In fact, we have extracted those features using some deep learning models from their original format.
+Note that all features in the sellers and buyers' datasets are NOT in their raw form. In fact, we have extracted those features using a deep learning model (more specifically, a dist-bert model) from their original format.
 
 ## 3. How to submit a solution?
 

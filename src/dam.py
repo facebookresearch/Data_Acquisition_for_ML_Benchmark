@@ -58,7 +58,8 @@ class Dam(object):
                                 delimiter=',',dtype=str)
         price_i = price[seller_id]       
         MyPricing1 = PriceFunction()
-        MyPricing1.setup(max_p = float(price_i[1]), method=price_i[0])
+        print("row number",ids['row_number'])
+        MyPricing1.setup(max_p = float(price_i[1]), method=price_i[0], data_size=ids['row_number'])
 
 
         samples = numpy.loadtxt(self._marketpath+str(self._instance)+"/summary/"+str(seller_id)+".csvsamples.csv",
@@ -66,6 +67,7 @@ class Dam(object):
 
                 
         return MyPricing1, ids, samples
+
 
 def main():    
     MyDam = Dam()

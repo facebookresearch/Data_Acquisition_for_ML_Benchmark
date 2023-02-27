@@ -173,7 +173,7 @@ model_name="knn",):
     return       
 
 def main():
-    instance_ids = [0,1,2,3,4]
+    instance_ids = [3,4]
     methods = ['single','uniform']
     for instance_id in instance_ids:
         for method in methods:
