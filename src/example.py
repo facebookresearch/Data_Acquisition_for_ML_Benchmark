@@ -24,8 +24,11 @@ print("budget is:",budget)
 # 3. Display seller_data 
 buyer_data = MyDam.getbuyerdata() # get buyer data
 print("buyer data is:",buyer_data)
+
+
 mlmodel = MyDam.getmlmodel() # get ml model
 print("mlmodel is",mlmodel)
+
 sellers_id = MyDam.getsellerid() # seller ids
 print("seller ids are", sellers_id)
 for i in sellers_id:
@@ -33,4 +36,4 @@ for i in sellers_id:
     print("seller ", i, " price: ", seller_i_price)
     print("seller ", i, " summary: ", seller_i_summary)
     print("seller ", i, " samples: ", seller_i_samples)
-	
+

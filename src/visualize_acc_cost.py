@@ -26,7 +26,7 @@ Created on Tue Aug 16 18:36:30 2022
 from sklearn.linear_model import LogisticRegression
 
 import matplotlib.pyplot as plt
-
+import matplotlib
 
 import numpy
 from seller import Seller
@@ -38,16 +38,19 @@ import pandas
 from sklearn.neighbors import KNeighborsClassifier
 import seaborn as sns
 
-def visualize_acc_cost(data_path="../logs/0/acc_cost_tradeoffs_logreg.csv",
+def visualize_acc_cost(data_path="../logs/0/acc_cost_tradeoffs_uniform_logreg.csv",
                        savepath="../figures/",
                        ):
+    plt.clf()
     data = pandas.read_csv(data_path)
     print("data",data)
     mean1 = data.groupby("budget").mean()
     var1 = data.groupby("budget").var()
-
+    max1 = data.groupby("budget").max()
+    min1 = data.groupby("budget").min()
     print("mean1",mean1['acc'])
     print("var",var1['acc'])
+    print("diff, max, and min",max1['acc']-min1['acc'],max1['acc'],min1['acc'])
     sns.color_palette("tab10")
     swarm_plot  = sns.histplot(data=data, x="acc", hue="budget",palette=["C0", "C1", "C2","C3","C4"])
     #swarm_plot = sns.scatterplot(data=data, x= "cost",y="acc")
@@ -55,14 +58,15 @@ def visualize_acc_cost(data_path="../logs/0/acc_cost_tradeoffs_logreg.csv",
     fig = swarm_plot.get_figure()
     data_parse = data_path.split("/")
     method = data_parse[-1].split("_")[-2]
+    instanceid = data_parse[-2]
     ml = data_parse[-1].split("_")[-1]    
-    fig.savefig(savepath+method+ml+".pdf")
+    fig.savefig(savepath+str(instanceid)+"/"+method+ml+".pdf")
 
     plt.figure()
 
     swarm_plot  = sns.lineplot(data=data, y="acc", x="budget", err_style="band")
     fig2 = swarm_plot.get_figure()
-    fig2.savefig(savepath+method+ml+"_line.pdf")
+    fig2.savefig(savepath+str(instanceid)+"/"+method+ml+"_line.pdf")
 
 
     return 
@@ -143,7 +147,15 @@ def evaluate_budget(MarketHelper,
 
        
 def main():
-    visualize_acc_cost()
+    matplotlib.pyplot.close('all')
+    instance_ids = [0,1,2,3,4]
+    methods = ['single','uniform']
+    for instance_id in instance_ids:
+        for method in methods:
+            visualize_acc_cost(data_path="../logs/"+str(instance_id)+"/acc_cost_tradeoffs_"+method+"_knn.csv")
+            visualize_acc_cost(data_path="../logs/"+str(instance_id)+"/acc_cost_tradeoffs_"+method+"_rf.csv")
+            visualize_acc_cost(data_path="../logs/"+str(instance_id)+"/acc_cost_tradeoffs_"+method+"_logreg.csv")
+
     '''
     print("evaluate acc and cost tradeoffs")
     instance_id=0

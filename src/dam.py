@@ -67,6 +67,7 @@ class Dam(object):
                 
         return MyPricing1, ids, samples
 
+
 def main():    
     MyDam = Dam()
     budget = MyDam.getbudget() # get budget

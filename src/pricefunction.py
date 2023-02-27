@@ -29,9 +29,11 @@ class PriceFunction(object):
     def __init__(self):
         return
         
-    def setup(self, max_p = 100, method="lin"):
+    def setup(self, max_p = 100, method="lin",
+            data_size=1):
         self.max_p = max_p
-        self.method="lin"
+        self.method = "lin"
+        self.data_size = 1
 
     def get_price(self, 
                  frac=1, 
@@ -44,6 +46,13 @@ class PriceFunction(object):
             return p1
         
         return
+
+    def get_price_samplesize(self,
+                            samplesize=10,
+                            ):
+        frac = samples/self.data_size
+        return self.get_price(frac)
+
         
 
     
