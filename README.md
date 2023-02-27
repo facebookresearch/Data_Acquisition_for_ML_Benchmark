@@ -64,6 +64,13 @@ seller_i_price, seller_i_summary, seller_i_samples =  MyDam.getsellerinfo(seller
 
 seller_i_price contains the pricing function. seller_i_summary includes (i) the number of rows, (ii) the number of columns, (iii) the histogram of each dimension, and (iv) the correlation between each column and the label. Seller_i_samples contains 5 samples from each dataset.  
 
+More details on the price function: given a sample size, the price can be calculated by calling the get_price_samplesize function. For example, if the sample size is 100, then calling
+
+```
+seller_i_price.get_price_samplesize(samplesize=100)
+```
+gives the price.
+
 More details on the seller summary: the seller_i_summary contains four fields as follows:
 
 ```
