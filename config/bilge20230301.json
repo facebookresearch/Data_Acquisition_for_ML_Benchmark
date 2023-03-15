@@ -1,4 +1,6 @@
 {
 "instance_ids":["0","1","2","3","4"],
-"submission_path":"../submission/bilge/"
+"submission_path":"../submission/bilge/",
+"model_name":"knn",
+"save_path":"../result/bilge20230301_knn.json"
 }

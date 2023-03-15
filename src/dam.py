@@ -58,7 +58,7 @@ class Dam(object):
                                 delimiter=',',dtype=str)
         price_i = price[seller_id]       
         MyPricing1 = PriceFunction()
-        print("row number",ids['row_number'])
+        #print("row number",ids['row_number'])
         MyPricing1.setup(max_p = float(price_i[1]), method=price_i[0], data_size=ids['row_number'])
 
 
