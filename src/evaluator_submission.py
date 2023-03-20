@@ -34,8 +34,25 @@ def evaluate_batch(data_config,
     instance_ids = data_config['instance_ids']
     result = dict()
     for id1 in instance_ids:
-        result[id1] = evaluate_once(data_config,instance_id=id1)    
+        result[id1] = evaluate_multiple_trial(data_config,instance_id=id1)    
     return result
+
+def evaluate_multiple_trial(data_config,
+                            instance_id,
+                            num_trial=10,
+                            ):
+    
+    results = [evaluate_once(data_config=data_config,
+                  instance_id=instance_id) for i in range(num_trial)]
+    #print("results are:",results)
+    results_avg = dict()
+    results_avg['cost'] = 0
+    results_avg['acc'] = 0
+    for item in results:
+        #print("item is:",item)
+        results_avg['cost'] += item['cost']/len(results)
+        results_avg['acc'] += item['acc']/len(results)
+    return results_avg
 
 def evaluate_once(data_config,
                   instance_id):
@@ -43,7 +60,9 @@ def evaluate_once(data_config,
     submission = load_submission(path = data_config['submission_path']+str(instance_id)+".csv")
     
     # get the helper
-    MarketHelper, MarketEngineObj, model, traindata, buyer_data = get_market_info(instance_id=instance_id)
+    model_name = data_config['model_name']
+    MarketHelper, MarketEngineObj, model, traindata, buyer_data = get_market_info(instance_id=instance_id,
+                                                                                  model_name=model_name)
     
     # calculate the cost of the submission
     cost = MarketHelper.get_cost(submission,MarketEngineObj)
@@ -89,10 +108,11 @@ def get_market_info(instance_id,
     return MyHelper, MyMarketEngine, mlmodel1,seller_data, buyer_data
 
 def main():
-    data_config = json.load(open("../config/bilge20230301.json")) # load the data folder
+    data_config = json.load(open("../config/bilge20230301_rf.json")) # load the data folder
     result = evaluate_batch(data_config)
     json_object = json.dumps(result, indent=4)
-    with open("../result/bilge20230301.json", "w") as outfile:
+    save_path = data_config['save_path']
+    with open(save_path, "w") as outfile:
         outfile.write(json_object)
     print("The result is:",result)
     

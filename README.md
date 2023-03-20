@@ -9,7 +9,10 @@ An increasingly large amount of data is purchased for AI-enabled data science ap
 
 How can one decide which datasets to acquire before actually purchasing the data to optimize the performance quality of an ML model?  In the DAM (Data-Acquisition-for-Machine-learning) benchmark, the participants are asked to tackle the aforementioned problem. Participants need to provide a data purchase strategy for a data buyer in K (=5 in the beta version) separate data marketplaces. In each data marketplace, there are a few data sellers offering datasets for sale, and one data buyer interested in acquiring some of those datasets to train an ML model. The seller provides a pricing function that depends on the number of purchased samples. The buyer first decides how many data points to purchase from each seller given a data acquisition budget b. Then those data points are compiled into one dataset to train an ML model f(). The buyer also has a dataset Db to evaluate the performance of the trained model. Similar to real-world data marketplaces, the buyer can observe no sellers’ datasets but some summary information from the sellers.
 
-## 2. How to access the buyer's observation?
+## 2. How to participate this challenge?
+We suggest to start participating by using the colab [notebook](https://colab.research.google.com/drive/1shqpk7Z_X_Tb-kiAQmC_nOL9BSRqEIXN?authuser=1#scrollTo=PRY9Ad8QJNfw). It is self-contained, and shows how to (i) install the needed library, (ii) access the buyer's observation, and (iii) create strategies ready to be submitted. In the following we explain this in more details. 
+
+## 3. How to access the buyer's observation?
 
 We provide a simple python library to access the buyer’s observation in each data marketplace.
 To use it, we recommand to create a virtual environment by
@@ -17,22 +20,17 @@ To use it, we recommand to create a virtual environment by
 conda create -n DAM python=3.8
 conda activate DAM
 ```
-and then install all libraries by
+and then clone the github repo and install all libraries, and download the data by
 ```
+git clone https://github.com/facebookresearch/Data_Acquisition_for_ML_Benchmark
+cd Data_Acquisition_for_ML_Benchmark
 pip install -r requirements.txt
+wget https://github.com/lchen001/Data_Acquisition_for_ML_Benchmark/releases/download/v0.0.1/marketinfo.zip
+! unzip marketinfo.zip
+cd src
 ```
 
-Next, (i) clone this repo, (ii) download the [data](https://drive.google.com/drive/folders/1JQhkG4yiU7exdoHhFs4eVfZapY2giaqt?usp=share_link), (iii) unzip the data, and (iv) place the downloaded and unzipped ```marketinfo``` folder in the top level of this repo.  
-
-Now, under the src folder, one can run the example
-```
-python3 example.py
-```
-
-We give a few more explanation below.
-
-To specify the marketplace id
-
+Now, one is ready to use this library. For example,  to specify the marketplace id, one can use
 
 ```
 from dam import Dam

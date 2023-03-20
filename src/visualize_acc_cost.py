@@ -48,7 +48,7 @@ def visualize_acc_cost(data_path="../logs/0/acc_cost_tradeoffs_uniform_logreg.cs
     var1 = data.groupby("budget").var()
     max1 = data.groupby("budget").max()
     min1 = data.groupby("budget").min()
-    print("mean1",mean1['acc'])
+    print("mean1 of acc",mean1['acc'])
     print("var",var1['acc'])
     print("diff, max, and min",max1['acc']-min1['acc'],max1['acc'],min1['acc'])
     sns.color_palette("tab10")
@@ -150,11 +150,13 @@ def main():
     matplotlib.pyplot.close('all')
     instance_ids = [0,1,2,3,4]
     methods = ['single','uniform']
+    
+    methods=['uniform']
     for instance_id in instance_ids:
         for method in methods:
-            visualize_acc_cost(data_path="../logs/"+str(instance_id)+"/acc_cost_tradeoffs_"+method+"_knn.csv")
+            #visualize_acc_cost(data_path="../logs/"+str(instance_id)+"/acc_cost_tradeoffs_"+method+"_knn.csv")
             visualize_acc_cost(data_path="../logs/"+str(instance_id)+"/acc_cost_tradeoffs_"+method+"_rf.csv")
-            visualize_acc_cost(data_path="../logs/"+str(instance_id)+"/acc_cost_tradeoffs_"+method+"_logreg.csv")
+            #visualize_acc_cost(data_path="../logs/"+str(instance_id)+"/acc_cost_tradeoffs_"+method+"_logreg.csv")
 
     '''
     print("evaluate acc and cost tradeoffs")
