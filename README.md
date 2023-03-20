@@ -62,6 +62,8 @@ seller_i_price, seller_i_summary, seller_i_samples =  MyDam.getsellerinfo(seller
 
 seller_i_price contains the pricing function. seller_i_summary includes (i) the number of rows, (ii) the number of columns, (iii) the histogram of each dimension, and (iv) the correlation between each column and the label. Seller_i_samples contains 5 samples from each dataset.  
 
+Note: For simplification purposes, all sellers sell the same type of data, or in a more mathematically way, their data distribution shares the same support. For example, the number of columns are the same, and so the semantic meaning.
+
 More details on the price function: given a sample size, the price can be calculated by calling the get_price_samplesize function. For example, if the sample size is 100, then calling
 
 ```
@@ -141,11 +143,7 @@ Requirements:
 
 (iii) do not create multiple accounts for submission;
 
-(iv) follow the honor code;
-
-(v) submit at most 2 times per week ;
-
-
+(iv) follow the honor code.
 
 ## Contact and License
 _DAM_ is Apache 2.0 licensed.
