@@ -94,20 +94,20 @@ Note that all features in the sellers and buyers' datasets are NOT in their raw 
 
 ## 3. How to submit a solution?
 
-The submission should contain K(=5) csv files. k.csv corresponds to the purchase strategy for the kth marketplace. Place all five submissions under your user name, and add a pull request to place them in \submission\. For example, one submission may look like
+The submission should contain K(=5) csv files. k.csv corresponds to the purchase strategy for the kth marketplace. The notebook will automatically generate csv files for submission under the folder ```\submission\my_submission```. For example, one submission may look like
 
 
 ```
 
- \submission\lchen001\0.csv 
+ \submission\my_submission\0.csv 
 
- \submission\lchen001\1.csv 
+ \submission\my_submission\1.csv 
 
- \submission\lchen001\2.csv 
+ \submission\my_submission\2.csv 
 
- \submission\lchen001\3.csv 
+ \submission\my_submission\3.csv 
 
- \submission\lchen001\4.csv
+ \submission\my_submission\4.csv
 
 ```
 
@@ -118,6 +118,8 @@ Each csv file should contain one line of numbers, where the ith number indicates
 ```
 
 means buying 100, 50, 200, and 500 samples from seller 1, seller 2, seller 3, and seller 4 separately. 
+
+Once you are ready, upload the csv files to DynaBench for evaluation: https://dynabench.org/tasks/DAM/
 
 
 ## 4. How is a submission evaluated?
